@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GuardKeyProject.Views.AddUserRecordPage"
+             xmlns:local="clr-namespace:GuardKeyProject.ViewModels">
+    <ContentPage.BindingContext>
+        <local:AddUserRecordViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout >
+
+            <Label Text="Id" IsEnabled="False"/>
+            <Entry Text="{Binding UserRecord.Id}" FontSize="Medium" IsEnabled="False"/>
+            <Label Text="Source" />
+            <Entry Text="{Binding UserRecord.SourceGroupName,Mode=TwoWay}" FontSize="Medium"/>
+            <Label Text="Resource" />
+            <Entry Text="{Binding UserRecord.ResourceName,Mode=TwoWay}" FontSize="Medium"/>
+            <Label Text="Name" />
+            <Entry Text="{Binding UserRecord.UserName,Mode=TwoWay}" FontSize="Medium"/>
+            <Label Text="Password" />
+            <Entry Text="{Binding UserRecord.Password,Mode=TwoWay}" FontSize="Medium"/>
+            <Label Text="Description" />
+            <Entry Text="{Binding UserRecord.Description,Mode=TwoWay}" FontSize="Medium"/>
+
+            <StackLayout>
+                <Button Text="Save"  Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
