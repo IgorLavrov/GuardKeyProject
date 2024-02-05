@@ -13,6 +13,7 @@ namespace GuardKeyProject.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
+
         public LoginPage()
         {
             InitializeComponent();
@@ -53,12 +54,6 @@ namespace GuardKeyProject.Views
                 DisplayAlert("Incorrect PIN", $"You entered an incorrect PIN: {pin}", "OK");
                 Application.Current.MainPage = new NavigationPage(new LoginPage());
                 Digit1.Focus();
-
-
-
-
-
-
 
             }
 

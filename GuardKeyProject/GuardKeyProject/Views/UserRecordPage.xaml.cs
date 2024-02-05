@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuardKeyProject.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +12,20 @@ namespace GuardKeyProject.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UserRecordPage : ContentPage
+
     {
+
+       UserRecordViewModel userRecordViewModel;
         public UserRecordPage()
         {
             InitializeComponent();
+            BindingContext= userRecordViewModel=new UserRecordViewModel();
         }
-    }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            userRecordViewModel.OnAppearing();
+        }
+    }   
 }

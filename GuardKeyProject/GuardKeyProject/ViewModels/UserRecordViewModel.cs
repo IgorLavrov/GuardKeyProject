@@ -1,4 +1,5 @@
 ﻿using GuardKeyProject.Models;
+using GuardKeyProject.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,6 +29,7 @@ namespace GuardKeyProject.ViewModels
 
         private async void OnAddUserRecord(object obj)
         {
+            Shell.Current.GoToAsync(nameof(AddUserRecordPage));
             //await Application.Current.MainPage.Navigation.PushAsync(new AddUserRecordPage());
         }
 

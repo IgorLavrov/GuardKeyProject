@@ -25,14 +25,16 @@ namespace GuardKeyProject.ViewModels
             var record = UserRecord;
             await App.Database.AddUserRecordAsync(record);
 
-            var navigationPage = Application.Current.MainPage as NavigationPage;
+            Shell.Current.GoToAsync("..");
+
+            //var navigationPage = Application.Current.MainPage as NavigationPage;
             //await navigationPage?.Navigation.PushAsync(new UserRecordPage());
         }
 
         private async void OnCancel()
         {
-
-            var navigationPage = Application.Current.MainPage as NavigationPage;
+            Shell.Current.GoToAsync("..");
+            //var navigationPage = Application.Current.MainPage as NavigationPage;
             //await navigationPage?.Navigation.PushAsync(new UserRecordPage());
         }
 

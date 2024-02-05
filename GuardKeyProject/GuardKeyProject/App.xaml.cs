@@ -27,20 +27,28 @@ namespace GuardKeyProject
         {
             InitializeComponent();
 
+        
+
             var pin = Preferences.Get("UserPIN", "");
 
             if (string.IsNullOrEmpty(pin))
             {
+               
+                //Shell.Current.GoToAsync(nameof(RegistrarionPage));
 
-                MainPage = new NavigationPage(new RegistrarionPage());
+               MainPage = new NavigationPage(new RegistrarionPage());
             }
             else
             {
-                MainPage = new NavigationPage(new Login());
+              
+                //Shell.Current.GoToAsync(nameof(LoginPage));
+
+                MainPage = new NavigationPage(new LoginPage());
             }
         }
         protected override void OnStart()
         {
+            
         }
 
         protected override void OnSleep()
