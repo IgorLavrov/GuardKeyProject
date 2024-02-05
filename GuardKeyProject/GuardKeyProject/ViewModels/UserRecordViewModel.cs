@@ -14,7 +14,16 @@ namespace GuardKeyProject.ViewModels
         public Command LoadUserRecordCommand { get; }
         public Command AddUserRecordCommand { get; }
 
-        public ObservableCollection<UserRecord> UserRecords { get; }
+        private ObservableCollection<UserRecord> _userRecord;
+        public ObservableCollection<UserRecord> UserRecords
+        {
+            get { return _userRecord; }
+            set
+            {
+                _userRecord = value;
+                OnPropertyChanged(nameof(UserRecords));
+            }
+        }
         public UserRecordViewModel()
         {
 
@@ -24,6 +33,7 @@ namespace GuardKeyProject.ViewModels
 
 
         }
+       
         /// <summary>
         /// // review
 
