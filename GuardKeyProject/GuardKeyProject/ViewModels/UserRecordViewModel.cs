@@ -13,6 +13,7 @@ namespace GuardKeyProject.ViewModels
     {
         public Command LoadUserRecordCommand { get; }
         public Command AddUserRecordCommand { get; }
+        public Command UserRecordTappedEdit { get; }
 
         private ObservableCollection<UserRecord> _userRecord;
         public ObservableCollection<UserRecord> UserRecords
@@ -24,16 +25,23 @@ namespace GuardKeyProject.ViewModels
                 OnPropertyChanged(nameof(UserRecords));
             }
         }
-        public UserRecordViewModel()
+        public UserRecordViewModel(INavigation _navigation)
         {
 
             LoadUserRecordCommand = new Command(async () => await ExecuteLoadUserRecordCommand());
             UserRecords = new ObservableCollection<UserRecord>();
             AddUserRecordCommand = new Command(OnAddUserRecord);
+            UserRecordTappedEdit=new Command<UserRecord> (OnEditUserRecord);
+            Navigation = _navigation;
 
 
         }
-       
+
+        private async void OnEditUserRecord(UserRecord record)
+        {
+            await Navigation.PushAsync(new AddUserRecordPage(record));
+        }
+
         /// <summary>
         /// // review
 

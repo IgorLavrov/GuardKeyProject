@@ -22,5 +22,17 @@ namespace GuardKeyProject.Views
             InitializeComponent();
             BindingContext = new AddUserRecordViewModel();
         }
+
+        public AddUserRecordPage(UserRecord record)
+        {
+            InitializeComponent();
+            BindingContext = new AddUserRecordViewModel();
+
+            if(record != null ) 
+            {
+
+                ((AddUserRecordViewModel)BindingContext).UserRecord = record;
+            }
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace GuardKeyProject.Views
         public UserRecordPage()
         {
             InitializeComponent();
-            BindingContext= userRecordViewModel=new UserRecordViewModel();
+            BindingContext= userRecordViewModel=new UserRecordViewModel(Navigation);
         }
 
         protected override void OnAppearing()

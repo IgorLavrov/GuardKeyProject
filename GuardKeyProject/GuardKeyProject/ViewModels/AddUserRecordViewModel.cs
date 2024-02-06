@@ -1,4 +1,5 @@
 ﻿using GuardKeyProject.Models;
+using GuardKeyProject.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -26,6 +27,7 @@ namespace GuardKeyProject.ViewModels
             await App.Database.AddUserRecordAsync(record);
 
             Shell.Current.GoToAsync("..");
+            //Shell.Current.GoToAsync(nameof(UserRecordPage));
 
             //var navigationPage = Application.Current.MainPage as NavigationPage;
             //await navigationPage?.Navigation.PushAsync(new UserRecordPage());
@@ -33,6 +35,7 @@ namespace GuardKeyProject.ViewModels
 
         private async void OnCancel()
         {
+            //Shell.Current.GoToAsync(nameof(UserRecordPage));
             Shell.Current.GoToAsync("..");
             //var navigationPage = Application.Current.MainPage as NavigationPage;
             //await navigationPage?.Navigation.PushAsync(new UserRecordPage());

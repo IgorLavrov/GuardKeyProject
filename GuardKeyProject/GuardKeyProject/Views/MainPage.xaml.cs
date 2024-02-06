@@ -80,13 +80,13 @@ namespace GuardKeyProject.Views
         }
         private async void Button_Clicked(object sender, EventArgs e)
         {
-
-
-            await Navigation.PushAsync(new AddUserRecordPage());
+           await  Shell.Current.GoToAsync($"//{nameof(AddUserRecordPage)}");
+            //await Navigation.PushAsync(new AddUserRecordPage());
         }
+
         private async void Button_Get_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new UserRecordPage());
+            await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}");
         }
         private async void Button_Edit_Clicked(object sender, EventArgs e)
         {

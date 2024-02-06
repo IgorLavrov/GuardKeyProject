@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Xamarin.Forms;
 
 namespace GuardKeyProject.ViewModels
 {
@@ -11,6 +12,8 @@ namespace GuardKeyProject.ViewModels
     {
 
         private UserRecord _ùserRecord;
+
+        public INavigation Navigation { get; set; }
 
         public UserRecord UserRecord
         {
