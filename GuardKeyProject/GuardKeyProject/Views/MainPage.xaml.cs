@@ -90,11 +90,11 @@ namespace GuardKeyProject.Views
         }
         private async void Button_Edit_Clicked(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new EditCompanyPage());
+            await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}");
         }
         private async void Button_Delete_Clicked(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new DeleteCompanyPage());
+            await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}");
         }
     }
 }

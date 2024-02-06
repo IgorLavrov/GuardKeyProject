@@ -14,6 +14,8 @@ namespace GuardKeyProject.ViewModels
         public Command LoadUserRecordCommand { get; }
         public Command AddUserRecordCommand { get; }
         public Command UserRecordTappedEdit { get; }
+        public Command UserRecordTappedDelete { get; }
+        public Command ClearRecordCommand { get; }
 
         private ObservableCollection<UserRecord> _userRecord;
         public ObservableCollection<UserRecord> UserRecords
@@ -32,9 +34,26 @@ namespace GuardKeyProject.ViewModels
             UserRecords = new ObservableCollection<UserRecord>();
             AddUserRecordCommand = new Command(OnAddUserRecord);
             UserRecordTappedEdit=new Command<UserRecord> (OnEditUserRecord);
+            UserRecordTappedDelete = new Command<UserRecord>(OnDeleteUserRecord);
+            ClearRecordCommand = new Command(ClearRecord);
             Navigation = _navigation;
 
 
+        }
+
+        private  void ClearRecord()
+        {
+            UserRecords.Clear();
+        }
+
+        private async void OnDeleteUserRecord(UserRecord record)
+        {
+            if (record == null)
+            {
+                return;
+            }
+            await App.Database.DeleteUserRecordAsync(record.Id);
+            await ExecuteLoadUserRecordCommand();
         }
 
         private async void OnEditUserRecord(UserRecord record)

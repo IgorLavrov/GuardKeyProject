@@ -18,9 +18,23 @@
                          IsRefreshing="{Binding IsBusy,Mode=OneWay}">
                 <CollectionView ItemsSource="{Binding UserRecords}"
                      SelectionMode="None">
+                    <CollectionView.EmptyView>
+                        <Label Text="No Data Found !" HorizontalOptions="Center" FontAttributes="Italic" FontSize="Large"/>
+                    </CollectionView.EmptyView>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout x:DataType="model:UserRecord">
+
+                                <SwipeView>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems>
+                                            <SwipeItem Text="Delete" BackgroundColor="Red"  Command="{Binding Source={RelativeSource AncestorType={x:Type local:UserRecordViewModel}},
+ Path=UserRecordTappedDelete}" CommandParameter=" {Binding .}"/>
+                                            
+                                            <SwipeItem IsDestructive="True" Text="Close" BackgroundColor="Green"/>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                               
                             <Grid Padding="5">
                                 <Frame CornerRadius="10" HasShadow="True">
                                     <StackLayout Orientation="Horizontal">
@@ -44,9 +58,23 @@
                                 </StackLayout>
                                 </Frame>
                             </Grid>
+                                </SwipeView>
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
+                    <CollectionView.Header>
+                        <StackLayout>
+                            <Label Text="Password Card" FontSize="Large" TextColor="Gray" HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </CollectionView.Header>
+                    <CollectionView.Footer>
+                        <StackLayout>
+                            <Label Text="Load More ..." FontSize="Large" TextColor="Gray" HorizontalOptions="Center"/>
+                            <Button Text="Clear"
+                               Command="{Binding ClearRecordCommand}"
+                               FontSize="Large" TextColor="Gray" HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </CollectionView.Footer>
                 </CollectionView>
             </RefreshView>
         </StackLayout>
