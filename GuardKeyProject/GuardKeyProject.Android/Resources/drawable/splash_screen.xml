@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <color android:color="@drawable/pict"></color>
-    </item>
-    <item>
-        <bitmap
+	<item>
+		<color android:color="@color/abc_decor_view_status_guard_light"></color>
+	</item>
+	<item>
+		<bitmap
 			android:src="@drawable/logo"
 			android:width="300dp"
             android:height="300dp"
@@ -13,5 +13,7 @@
             android:gravity="center"
            
 ></bitmap>
-    </item>
+	</item>
 </layer-list>
+
+
