@@ -16,7 +16,7 @@ namespace GuardKeyProject
             var sub = new AbsoluteLayout();
             SplashImage = new Image
             {
-                Source = "logo.jpg",
+                Source = "test.jpg",
                 WidthRequest = 250,
                 HeightRequest = 250,
             };
@@ -26,8 +26,9 @@ namespace GuardKeyProject
 
             sub.Children.Add(SplashImage);
 
-            this.BackgroundColor = Color.FromHex("#429de3");
-            this.Content = sub;
+            //this.BackgroundColor = Color.FromHex("#27071D");
+            this.BackgroundImageSource = "background.png";
+            this.Content = sub; 
         }
 
 

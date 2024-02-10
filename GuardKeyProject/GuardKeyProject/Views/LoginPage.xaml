@@ -4,16 +4,13 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             BackgroundImageSource="background.png"
              x:Class="GuardKeyProject.Views.LoginPage"
-             
              Shell.NavBarIsVisible="False">
-  
-        <ContentPage.Content>
-   
 
-            <ScrollView>
+    <ContentPage.Content>
 
-
+        <ScrollView>
                 <Grid  Margin="20,0,20,0"  VerticalOptions="CenterAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -22,21 +19,17 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <StackLayout>
-                        <Label Text="Enter a password"
-         Margin="30"
-         FontSize="18" 
-         TextColor="#4549D1"
-         HorizontalOptions="Center" 
-  />
-
-
-
-
-                        <StackLayout  Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                            <Entry x:Name="Digit1" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" />
-                            <Entry x:Name="Digit2" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" />
-                            <Entry x:Name="Digit3" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" />
-                            <Entry x:Name="Digit4" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" />
+                    <Label Text="Enter a password"
+                                Margin="30"
+                                FontSize="18" 
+                                TextColor="#ffffff"
+                                HorizontalOptions="Center" 
+                        />
+                    <StackLayout  Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Entry x:Name="Digit1" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" TextColor="White"/>
+                        <Entry x:Name="Digit2" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" TextColor="White" />
+                        <Entry x:Name="Digit3" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" TextColor="White" />
+                        <Entry x:Name="Digit4" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" TextColor="White"/>
                         </StackLayout>
                     </StackLayout>
                 </Grid>

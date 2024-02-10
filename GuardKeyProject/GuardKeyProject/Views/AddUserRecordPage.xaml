@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuardKeyProject.Views.AddUserRecordPage"
-             xmlns:local="clr-namespace:GuardKeyProject.ViewModels">
+             xmlns:local="clr-namespace:GuardKeyProject.ViewModels"
+             BackgroundImageSource="background.png">
     
     <ContentPage.BindingContext>
         <local:AddUserRecordViewModel/>
@@ -11,18 +12,18 @@
     <ContentPage.Content>
         <StackLayout Spacing="5" Padding="15" >
 
-            <Label Text="Id" IsEnabled="False"/>
+            <Label Text="Id" IsEnabled="False" TextColor="White"/>
             <Entry Text="{Binding UserRecord.Id}" FontSize="Medium" IsEnabled="False"/>
-            <Label Text="Source" />
-            <Entry Text="{Binding UserRecord.SourceGroupName,Mode=TwoWay}" FontSize="Medium"/>
-            <Label Text="Resource" />
-            <Entry Text="{Binding UserRecord.ResourceName,Mode=TwoWay}" FontSize="Medium"/>
-            <Label Text="Name" />
-            <Entry Text="{Binding UserRecord.UserName,Mode=TwoWay}" FontSize="Medium"/>
-            <Label Text="Password" />
-            <Entry Text="{Binding UserRecord.Password,Mode=TwoWay}" FontSize="Medium"/>
-            <Label Text="Description" />
-            <Entry Text="{Binding UserRecord.Description,Mode=TwoWay}" FontSize="Medium"/>
+            <Label Text="Source" TextColor="White"/>
+            <Entry Text="{Binding UserRecord.SourceGroupName,Mode=TwoWay}" FontSize="Medium" TextColor="White"/>
+            <Label Text="Resource" TextColor="White" />
+            <Entry Text="{Binding UserRecord.ResourceName,Mode=TwoWay}" FontSize="Medium" TextColor="White"/>
+            <Label Text="Name" TextColor="White" />
+            <Entry Text="{Binding UserRecord.UserName,Mode=TwoWay}" FontSize="Medium" TextColor="White"/>
+            <Label Text="Password" TextColor="White"/>
+            <Entry Text="{Binding UserRecord.Password,Mode=TwoWay}" FontSize="Medium" TextColor="White"/>
+            <Label Text="Description" TextColor="White"/>
+            <Entry Text="{Binding UserRecord.Description,Mode=TwoWay}" FontSize="Medium" TextColor="White"/>
 
             <StackLayout>
                 <Button Text="Save"  Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
