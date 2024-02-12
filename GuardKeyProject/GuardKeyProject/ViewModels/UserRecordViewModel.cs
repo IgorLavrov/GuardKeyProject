@@ -1,8 +1,10 @@
 ﻿using GuardKeyProject.Models;
 using GuardKeyProject.Views;
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +20,7 @@ namespace GuardKeyProject.ViewModels
         public Command UserRecordTappedDelete { get; }
 
         public Command ClearRecordCommand { get; }
-      
+
         public Command SearchCommand { get; }
 
         private string _searchText;
@@ -34,11 +36,9 @@ namespace GuardKeyProject.ViewModels
                 }
             }
         }
-     
 
-
-
-
+    
+        public ObservableCollection<string> FilterOptions { get; }
         private ObservableCollection<UserRecord> _userRecord;
         public ObservableCollection<UserRecord> UserRecords
         {
@@ -50,9 +50,35 @@ namespace GuardKeyProject.ViewModels
             }
         }
 
+        //private ObservableCollection<UserRecord> _userRecord;
+        //public ObservableCollection<UserRecord> UserRecords
+        //{
+        //    get { return _userRecord; }
+        //    set
+        //    {
+        //        _userRecord = value;
+        //        OnPropertyChanged(nameof(UserRecords));
+        //    }
+        //}
+
+        string selectedFilter = "All";
+        public string SelectedFilter
+        {
+            get => selectedFilter;
+            set
+            {
+                if (setProperty(ref selectedFilter, value))
+                    FilterItemsAsync();
+            }
+        }
+
+        
+
+       
+
         public UserRecordViewModel(INavigation _navigation)
         {
-
+          
             LoadUserRecordCommand = new Command(async () => await ExecuteLoadUserRecordCommand());
             UserRecords = new ObservableCollection<UserRecord>();
             AddUserRecordCommand = new Command(OnAddUserRecord);
@@ -61,23 +87,56 @@ namespace GuardKeyProject.ViewModels
             ClearRecordCommand = new Command(ClearRecord);
             SearchCommand = new Command(ExecuteSearch);
             Navigation = _navigation;
+            FilterOptions = new ObservableCollection<string>()
+    {
+        "All",
+        "affa",
+        "shsh",
+        "Editor",
+        "Student"
+    };
 
 
         }
+
+        async Task FilterItemsAsync()
+        {
+            if (SelectedFilter == "All")
+            {
+                // Load all records
+                ExecuteLoadUserRecordCommand();
+
+                // Reset SelectedFilter to allow choosing a different option
+                SelectedFilter = null;
+            }
+            else
+            {
+                IEnumerable<UserRecord> filteredRecords;
+                // Filter records based on the selected option
+                filteredRecords = await App.Database.SortRecordByPicker(SelectedFilter);
+
+                // Clear the existing records and add the filtered ones
+                UserRecords.Clear();
+                foreach (var record in filteredRecords)
+                {
+                    UserRecords.Add(record);
+                }
+            }
+        }
+
         private async void ExecuteSearch()
         {
             string searchText = SearchText;
 
             IEnumerable<UserRecord> prodlist;
 
-            if (string.IsNullOrWhiteSpace(searchText))
+            if (searchText==null)
             {
-                // If search text is empty, load all records
+               
                 prodlist = await App.Database.GetUserRecordsAsync();
             }
             else
             {
-                // If search text is not empty, perform search
                 prodlist = await App.Database.SortRecord(searchText);
             }
 
@@ -91,7 +150,6 @@ namespace GuardKeyProject.ViewModels
                 UserRecords.Add(prod);
             }
 
-            // Notify UI that UserRecords has changed
             OnPropertyChanged(nameof(UserRecords));
         }
 
@@ -161,9 +219,12 @@ namespace GuardKeyProject.ViewModels
 
         async Task ExecuteLoadUserRecordCommand()
         {
+           
+
             IsBusy = true;
             try
             {
+
                 UserRecords.Clear();
                 var prodlist = await App.Database.GetUserRecordsAsync();
                 foreach (var prod in prodlist)
@@ -171,10 +232,9 @@ namespace GuardKeyProject.ViewModels
                     UserRecords.Add(prod);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
-
+                Debug.WriteLine(ex);
             }
             finally
             { IsBusy = false; }

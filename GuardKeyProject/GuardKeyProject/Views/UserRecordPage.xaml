@@ -13,15 +13,19 @@
     
 
     <ContentPage.Content>
+        
         <ScrollView>
             <StackLayout>
-                <SearchBar Placeholder="Search"
-           BackgroundColor="Wheat"
-           TextColor="White"
-           Text="{Binding SearchText}"
-           SearchCommand="{Binding SearchCommand}"
-           SearchCommandParameter="{Binding SearchText}"/>
-
+                <StackLayout Orientation="Horizontal" Padding="10">
+                    <Label Text="Filter Items:" 
+               VerticalOptions="Center"/>
+                    <Picker ItemsSource="{Binding FilterOptions}" 
+                SelectedItem="{Binding SelectedFilter}" 
+                VerticalOptions="Center" 
+                HorizontalOptions="FillAndExpand" 
+                            Background="wheat"/>
+                </StackLayout>
+                <SearchBar Placeholder="Search" BackgroundColor="Wheat" TextColor="White" Text="{Binding SearchText}" SearchCommand="{Binding SearchCommand}" />
 
                 <RefreshView x:DataType="local:UserRecordViewModel"
                          Command="{Binding LoadUserRecordCommand}"

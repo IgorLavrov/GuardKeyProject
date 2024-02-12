@@ -19,6 +19,7 @@ namespace GuardKeyProject.Services
 
         Task<IEnumerable<UserRecord>> SortRecord(string name);
 
+        Task<IEnumerable<UserRecord>> SortRecordByPicker( string name);
 
     }
 }
