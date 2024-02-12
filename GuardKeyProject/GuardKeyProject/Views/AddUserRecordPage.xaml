@@ -15,7 +15,16 @@
             <Label Text="Id" IsEnabled="False" TextColor="White"/>
             <Entry Text="{Binding UserRecord.Id}" FontSize="Medium" IsEnabled="False"/>
             <Label Text="Source" TextColor="White"/>
-            <Entry Text="{Binding UserRecord.SourceGroupName,Mode=TwoWay}" FontSize="Medium" TextColor="White"/>
+            <!--<Entry Text="{Binding UserRecord.SourceGroupName,Mode=TwoWay}" FontSize="Medium" TextColor="White"/>-->
+            <Picker x:Name="filterOptionsPicker"
+        ItemsSource="{Binding FilterOptions}" 
+        SelectedItem="{Binding SelectedFilter}" 
+        VerticalOptions="Center" 
+        HorizontalOptions="FillAndExpand" 
+        Background="wheat"
+        SelectedIndexChanged="OnFilterOptionsPickerSelectedIndexChanged"/>
+
+
             <Label Text="Resource" TextColor="White" />
             <Entry Text="{Binding UserRecord.ResourceName,Mode=TwoWay}" FontSize="Medium" TextColor="White"/>
             <Label Text="Name" TextColor="White" />

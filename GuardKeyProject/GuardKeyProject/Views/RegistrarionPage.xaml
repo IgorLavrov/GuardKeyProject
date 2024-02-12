@@ -37,7 +37,7 @@
                         <Label Text="Register" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                     </StackLayout>
 
-                    <StackLayout  Grid.Row="2" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <StackLayout  Grid.Row="2" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="Wheat">
                         <Entry x:Name="Digit1" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" />
                         <Entry x:Name="Digit2" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" />
                         <Entry x:Name="Digit3" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" />

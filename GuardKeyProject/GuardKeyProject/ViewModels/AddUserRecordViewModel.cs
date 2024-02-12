@@ -2,6 +2,8 @@
 using GuardKeyProject.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Text;
 using Xamarin.Forms;
 
@@ -13,12 +15,32 @@ namespace GuardKeyProject.ViewModels
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
 
-        public AddUserRecordViewModel()
+        private ObservableCollection<string> _filterOptions;
+
+        public ObservableCollection<string> FilterOptions
         {
+            get => _filterOptions;
+            set => setProperty(ref _filterOptions, value);
+        }
+
+       
+
+    public AddUserRecordViewModel()
+        {
+            FilterOptions = new ObservableCollection<string>()
+        {
+            
+            "affa",
+            "shsh",
+            "Admin",
+            "Student"
+        };
+
             SaveCommand = new Command(OnSave);
             CancelCommand = new Command(OnCancel);
             this.PropertyChanged +=
                 (_, __) => SaveCommand.ChangeCanExecute();
+
             UserRecord = new UserRecord();
         }
         private async void OnSave()
@@ -40,6 +62,7 @@ namespace GuardKeyProject.ViewModels
             //var navigationPage = Application.Current.MainPage as NavigationPage;
             //await navigationPage?.Navigation.PushAsync(new UserRecordPage());
         }
+
 
 
 

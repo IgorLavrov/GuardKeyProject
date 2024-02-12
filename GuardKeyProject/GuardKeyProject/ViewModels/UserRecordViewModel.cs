@@ -92,7 +92,7 @@ namespace GuardKeyProject.ViewModels
         "All",
         "affa",
         "shsh",
-        "Editor",
+        "Admin",
         "Student"
     };
 

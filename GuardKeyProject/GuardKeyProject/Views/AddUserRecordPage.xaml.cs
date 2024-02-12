@@ -17,22 +17,55 @@ namespace GuardKeyProject.Views
     {
 
         public UserRecord UserRecord { get; set; }
+        private AddUserRecordViewModel viewModel;
+        //public AddUserRecordPage()
+        //{
+        //    InitializeComponent();
+        //    BindingContext = new AddUserRecordViewModel();
+        //}
+
+        //public AddUserRecordPage(UserRecord record)
+        //{
+        //    InitializeComponent();
+        //    BindingContext = new AddUserRecordViewModel();
+
+        //    if (record != null)
+        //    {
+
+        //        ((AddUserRecordViewModel)BindingContext).UserRecord = record;
+        //    }
+        //}
         public AddUserRecordPage()
         {
             InitializeComponent();
-            BindingContext = new AddUserRecordViewModel();
+            viewModel = new AddUserRecordViewModel();
+            BindingContext = viewModel;
+            UserRecord = viewModel.UserRecord; // Initialize UserRecord here
         }
 
         public AddUserRecordPage(UserRecord record)
         {
             InitializeComponent();
-            BindingContext = new AddUserRecordViewModel();
+            viewModel = new AddUserRecordViewModel();
 
-            if(record != null ) 
+            if (record != null)
             {
+                viewModel.UserRecord = record;
+            }
 
-                ((AddUserRecordViewModel)BindingContext).UserRecord = record;
+            BindingContext = viewModel;
+            UserRecord = viewModel.UserRecord; // Initialize UserRecord here
+        }
+
+        private void OnFilterOptionsPickerSelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (filterOptionsPicker.SelectedItem != null)
+            {
+                // Update UserRecord.SourceGroupName with the selected item
+                UserRecord.SourceGroupName = filterOptionsPicker.SelectedItem.ToString();
             }
         }
+
+
     }
 }
