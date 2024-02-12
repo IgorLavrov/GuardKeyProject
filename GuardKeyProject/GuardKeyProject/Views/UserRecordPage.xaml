@@ -17,8 +17,8 @@
         <ScrollView>
             <StackLayout>
                 <StackLayout Orientation="Horizontal" Padding="10">
-                    <Label Text="Filter Items:" 
-               VerticalOptions="Center"/>
+                    <Label Text="Filter Group:" 
+               VerticalOptions="Center" TextColor="White"/>
                     <Picker ItemsSource="{Binding FilterOptions}" 
                 SelectedItem="{Binding SelectedFilter}" 
                 VerticalOptions="Center" 
