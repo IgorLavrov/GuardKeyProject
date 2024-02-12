@@ -101,28 +101,42 @@ namespace GuardKeyProject.ViewModels
 
         async Task FilterItemsAsync()
         {
-            if (SelectedFilter == "All")
-            {
-                // Load all records
-                ExecuteLoadUserRecordCommand();
 
-                // Reset SelectedFilter to allow choosing a different option
-                SelectedFilter = null;
-            }
-            else
-            {
-                IEnumerable<UserRecord> filteredRecords;
-                // Filter records based on the selected option
-                filteredRecords = await App.Database.SortRecordByPicker(SelectedFilter);
 
-                // Clear the existing records and add the filtered ones
-                UserRecords.Clear();
-                foreach (var record in filteredRecords)
+            try
+            {
+                IsBusy = true;
+
+                if (SelectedFilter == "All")
                 {
-                    UserRecords.Add(record);
+                    // Load all records
+                    await ExecuteLoadUserRecordCommand();
+                }
+                else
+                {
+                    IEnumerable<UserRecord> filteredRecords;
+                    // Filter records based on the selected option
+                    filteredRecords = await App.Database.SortRecordByPicker(SelectedFilter);
+
+                    // Clear the existing records and add the filtered ones
+                    UserRecords.Clear();
+                    foreach (var record in filteredRecords)
+                    {
+                        UserRecords.Add(record);
+                    }
+
                 }
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
+    
 
         private async void ExecuteSearch()
         {
