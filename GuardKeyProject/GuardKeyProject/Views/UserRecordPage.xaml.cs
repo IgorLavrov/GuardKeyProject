@@ -18,6 +18,7 @@ namespace GuardKeyProject.Views
        UserRecordViewModel userRecordViewModel;
         public UserRecordPage()
         {
+           
             InitializeComponent();
             BindingContext= userRecordViewModel=new UserRecordViewModel(Navigation);
         }
@@ -27,5 +28,7 @@ namespace GuardKeyProject.Views
             base.OnAppearing();
             userRecordViewModel.OnAppearing();
         }
+
+       
     }   
 }

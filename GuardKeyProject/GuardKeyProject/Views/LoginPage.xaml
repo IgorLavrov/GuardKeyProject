@@ -26,10 +26,10 @@
                                 HorizontalOptions="Center" 
                         />
                     <StackLayout  Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                        <Entry x:Name="Digit1" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" TextColor="White"/>
-                        <Entry x:Name="Digit2" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" TextColor="White" />
-                        <Entry x:Name="Digit3" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" TextColor="White" />
-                        <Entry x:Name="Digit4" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" TextColor="White"/>
+                        <Entry x:Name="Digit1" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" TextColor="White" BackgroundColor="Wheat"/>
+                        <Entry x:Name="Digit2" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" TextColor="White" BackgroundColor="Wheat"/>
+                        <Entry x:Name="Digit3" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" TextColor="White" BackgroundColor="Wheat"/>
+                        <Entry x:Name="Digit4" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" TextColor="White" BackgroundColor="Wheat"/>
                         </StackLayout>
                     </StackLayout>
                 </Grid>

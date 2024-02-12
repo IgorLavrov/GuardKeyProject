@@ -42,6 +42,13 @@ namespace GuardKeyProject.Services
             return await _database.Table<UserRecord>().Where(p => p.Id == id).FirstOrDefaultAsync();
         }
 
+        public async Task<IEnumerable<UserRecord>> SortRecord(string name)
+        {
+            return await _database.Table<UserRecord>().Where(value => value.SourceGroupName.ToLower().Contains(name.ToLower()))
+    .ToListAsync();
+        }
+
+
         public async Task<IEnumerable<UserRecord>> GetUserRecordsAsync()
         {
             return await Task.FromResult(await _database.Table<UserRecord>().ToListAsync());

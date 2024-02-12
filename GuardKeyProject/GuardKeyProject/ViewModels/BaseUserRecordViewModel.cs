@@ -44,24 +44,26 @@ namespace GuardKeyProject.ViewModels
 
 
         public event PropertyChangedEventHandler PropertyChanged;
-        //protected void OnPropertyChanged([CallerMemberName] string propertyName="")
-        //    {
-        //    var changed=PropertyChanged;
-        //    if (changed != null)
-        //        return;
+       
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        //protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        //{
+        //    var changed = PropertyChanged;
+        //    if (changed == null)
+        //        return;  // Remove this line
 
         //    changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         //}
 
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            var changed = PropertyChanged;
-            if (changed == null)
-                return;  // Remove this line
 
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+
+
 
         //    public event PropertyChangedEventHandler PropertyChanged;
 

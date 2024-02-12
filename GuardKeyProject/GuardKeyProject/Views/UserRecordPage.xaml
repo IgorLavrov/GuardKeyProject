@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:GuardKeyProject.ViewModels"
              xmlns:model="clr-namespace:GuardKeyProject.Models"
-             x:Class="GuardKeyProject.Views.UserRecordPage"    
+             x:Class="GuardKeyProject.Views.UserRecordPage" 
+              BackgroundImageSource="background.png"
              >
 
     <ContentPage.ToolbarItems>
@@ -12,10 +13,21 @@
     
 
     <ContentPage.Content>
-        <StackLayout>
-            <RefreshView x:DataType="local:UserRecordViewModel"
+        <ScrollView>
+            <StackLayout>
+                <SearchBar Placeholder="Search"
+           BackgroundColor="Wheat"
+           TextColor="White"
+           Text="{Binding SearchText}"
+           SearchCommand="{Binding SearchCommand}"
+           SearchCommandParameter="{Binding SearchText}"/>
+
+
+                <RefreshView x:DataType="local:UserRecordViewModel"
                          Command="{Binding LoadUserRecordCommand}"
-                         IsRefreshing="{Binding IsBusy,Mode=OneWay}">
+                         IsRefreshing="{Binding IsBusy,Mode=OneWay}"
+                         >
+                
                 <CollectionView ItemsSource="{Binding UserRecords}"
                      SelectionMode="None">
                     <CollectionView.EmptyView>
@@ -36,11 +48,11 @@
                                     </SwipeView.RightItems>
                                
                             <Grid Padding="5">
-                                <Frame CornerRadius="10" HasShadow="True">
+                                <Frame CornerRadius="10" HasShadow="True"  BorderColor="Aqua" BackgroundColor="LightCoral">
                                     <StackLayout Orientation="Horizontal">
                                     <StackLayout >
-                                                <Label Grid.Column="1" Text="{Binding SourceGroupName}"></Label>
-                                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding ResourceName}" ></Label>
+                                                <Label Grid.Column="1" Text="{Binding SourceGroupName}" TextColor="DimGray"></Label>
+                                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding ResourceName}" TextColor="DimGray" ></Label>
                                             </StackLayout>
                                             <StackLayout VerticalOptions="Center" HorizontalOptions="EndAndExpand">
                                                 <Image Source="edit.png" Grid.Column="1" WidthRequest="30" HeightRequest="30" VerticalOptions="End">
@@ -78,5 +90,6 @@
                 </CollectionView>
             </RefreshView>
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

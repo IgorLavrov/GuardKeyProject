@@ -17,6 +17,8 @@ namespace GuardKeyProject.Services
 
         Task<IEnumerable<UserRecord>> GetUserRecordsAsync();
 
+        Task<IEnumerable<UserRecord>> SortRecord(string name);
+
 
     }
 }
