@@ -22,16 +22,15 @@ namespace GuardKeyProject.Views
 
             var absoluteLayout = new AbsoluteLayout();
 
-            // Background Image
-            //var backgroundImage = new Image
-            //{
-            //    Source = ".jpg", // replace with your image source
-            //    Aspect = Aspect.AspectFill,
-            //    Opacity = 0.20
-            //};
-            //AbsoluteLayout.SetLayoutFlags(backgroundImage, AbsoluteLayoutFlags.All);
-            //AbsoluteLayout.SetLayoutBounds(backgroundImage, new Rectangle(0, 0, 1, 1));
-            //absoluteLayout.Children.Add(backgroundImage);
+            
+            var backgroundImage = new Image
+            {
+                Source = "background.png", // replace with your image source
+                Aspect = Aspect.AspectFill
+            };
+            AbsoluteLayout.SetLayoutFlags(backgroundImage, AbsoluteLayoutFlags.All);
+            AbsoluteLayout.SetLayoutBounds(backgroundImage, new Rectangle(0, 0, 1, 1));
+            absoluteLayout.Children.Add(backgroundImage);
 
             Button button = new Button();
             button.Text = "Add Cart";
