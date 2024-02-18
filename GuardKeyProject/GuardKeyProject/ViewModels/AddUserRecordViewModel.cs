@@ -23,18 +23,18 @@ namespace GuardKeyProject.ViewModels
             set => setProperty(ref _filterOptions, value);
         }
 
-       
 
-    public AddUserRecordViewModel()
+        private async void InitializeFilterOptionsAsync()
         {
-            FilterOptions = new ObservableCollection<string>()
+            // GetCategoriesAsync is asynchronous, so use await
+            var categories = await App.CategoryService.GetCategoriesAsync();
+
+            // Initialize the FilterOptions once the categories are retrieved
+            FilterOptions = new ObservableCollection<string>(categories);
+        }
+        public AddUserRecordViewModel()
         {
-            
-            "affa",
-            "shsh",
-            "Admin",
-            "Student"
-        };
+            InitializeFilterOptionsAsync();
 
             SaveCommand = new Command(OnSave);
             CancelCommand = new Command(OnCancel);

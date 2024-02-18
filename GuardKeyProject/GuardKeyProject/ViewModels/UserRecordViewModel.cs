@@ -38,7 +38,7 @@ namespace GuardKeyProject.ViewModels
         }
 
     
-        public ObservableCollection<string> FilterOptions { get; }
+        public ObservableCollection<string> FilterOptions { get; set; }
         private ObservableCollection<UserRecord> _userRecord;
         public ObservableCollection<UserRecord> UserRecords
         {
@@ -72,13 +72,23 @@ namespace GuardKeyProject.ViewModels
             }
         }
 
-        
 
+
+        private async void InitializeFilterOptionsAsync()
+        {
+            // GetCategoriesAsync is asynchronous, so use await
+            var categories = await App.CategoryService.GetCategoriesAsync();
+
+            // Initialize the FilterOptions once the categories are retrieved
+            FilterOptions = new ObservableCollection<string>(categories);
+        }
+       
        
 
-        public UserRecordViewModel(INavigation _navigation)
+
+            public UserRecordViewModel(INavigation _navigation)
         {
-          
+            InitializeFilterOptionsAsync();
             LoadUserRecordCommand = new Command(async () => await ExecuteLoadUserRecordCommand());
             UserRecords = new ObservableCollection<UserRecord>();
             AddUserRecordCommand = new Command(OnAddUserRecord);
@@ -87,16 +97,15 @@ namespace GuardKeyProject.ViewModels
             ClearRecordCommand = new Command(ClearRecord);
             SearchCommand = new Command(ExecuteSearch);
             Navigation = _navigation;
-            FilterOptions = new ObservableCollection<string>()
-    {
-        "All",
-        "affa",
-        "shsh",
-        "Admin",
-        "Student"
-    };
+            
 
 
+        }
+        public async Task RefreshFilterOptionsAsync()
+        {
+            var categories = await App.CategoryService.GetCategoriesAsync();
+            FilterOptions = new ObservableCollection<string>(categories);
+            OnPropertyChanged(nameof(FilterOptions));
         }
 
         async Task FilterItemsAsync()
@@ -144,15 +153,15 @@ namespace GuardKeyProject.ViewModels
 
             IEnumerable<UserRecord> prodlist;
 
-            if (searchText==null)
-            {
+            //if (searchText=="")
+            //{
                
-                prodlist = await App.Database.GetUserRecordsAsync();
-            }
-            else
-            {
+            //    prodlist = await App.Database.GetUserRecordsAsync();
+            //}
+            //else
+            //{
                 prodlist = await App.Database.SortRecord(searchText);
-            }
+            //}
 
             UpdateUserRecords(prodlist);
         }

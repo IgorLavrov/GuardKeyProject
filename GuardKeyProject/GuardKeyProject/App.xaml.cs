@@ -1,5 +1,6 @@
 ﻿using GuardKeyProject.Services;
 using GuardKeyProject.Views;
+using SQLite;
 using System;
 using System.IO;
 using Xamarin.Essentials;
@@ -10,20 +11,51 @@ namespace GuardKeyProject
 {
     public partial class App : Application
     {
+      
         public const string DATABASE_NAME = "record.db";
         public static UserRecordService _database;
+        public static CategoryService _categoryService;
+
         public static UserRecordService Database
         {
             get
+        {
+            if (_database == null)
             {
-                if (_database == null)
-                {
-                    _database = new UserRecordService(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DATABASE_NAME));
-                }
-                return _database;
+                _database = new UserRecordService(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DATABASE_NAME));
             }
+            return _database;
         }
-        public App()
+    }
+
+    public static CategoryService CategoryService
+{
+    get
+    {
+        if (_categoryService == null)
+        {
+            var database = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DATABASE_NAME));
+            _categoryService = new CategoryService(database);
+        }
+
+        // Ensure that the categories are seeded
+        //_categoryService.SeedCategoriesAsync();
+
+        return _categoryService;
+    }
+}
+//public static UserRecordService Database
+//{
+//    get
+//    {
+//        if (_database == null)
+//        {
+//            _database = new UserRecordService(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DATABASE_NAME));
+//        }
+//        return _database;
+//    }
+//}
+public App()
         {
             InitializeComponent();
 

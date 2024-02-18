@@ -21,14 +21,23 @@ namespace GuardKeyProject.Views
            
             InitializeComponent();
             BindingContext= userRecordViewModel=new UserRecordViewModel(Navigation);
+            
         }
+
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            userRecordViewModel.RefreshFilterOptionsAsync();
             userRecordViewModel.OnAppearing();
         }
 
-       
+        //protected override void OnDisappearing()
+        //{
+        //    base.OnDisappearing();
+
+        //    // Cleanup or handle anything when the page disappears
+        //}
+
     }   
 }
