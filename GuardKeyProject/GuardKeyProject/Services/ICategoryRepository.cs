@@ -20,6 +20,8 @@ namespace GuardKeyProject.Services
 
         Task<Category> GetCategory(int id);
 
+        Task<List<Category>> GetAllCategoriesAsync();
+
 
     }
 }

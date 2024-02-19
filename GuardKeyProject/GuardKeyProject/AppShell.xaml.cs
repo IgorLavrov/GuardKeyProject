@@ -16,6 +16,8 @@ namespace GuardKeyProject
           
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(AddUserRecordPage), typeof(AddUserRecordPage));
+            Routing.RegisterRoute(nameof(CategoryPage), typeof(CategoryPage));
+            Routing.RegisterRoute(nameof(UserRecordPage), typeof(UserRecordPage));
 
 
         }

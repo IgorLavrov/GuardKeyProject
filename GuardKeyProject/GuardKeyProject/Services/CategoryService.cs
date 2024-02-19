@@ -70,5 +70,11 @@ namespace GuardKeyProject.Services
             return await _database.GetAsync<Category>(id);
             //return await _database.FindAsync<TaskModel>(id);
         }
+
+        public async Task<List<Category>> GetAllCategoriesAsync()
+        {
+            return await _database.Table<Category>().ToListAsync();
+          
+        }
     }
 }
