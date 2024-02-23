@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 	<item>
-		<color android:color="@color/abc_decor_view_status_guard_light"></color>
+		<bitmap android:src="@drawable/background"></bitmap>
 	</item>
 	<item>
 		<bitmap
-			android:src="@drawable/logo"
-			android:width="300dp"
-            android:height="300dp"
+			
+			android:src="@drawable/test"
+		
             android:tileMode="disabled"
 			
             android:gravity="center"
