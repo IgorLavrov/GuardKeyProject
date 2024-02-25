@@ -2,56 +2,36 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GuardKeyProject.Views.RegistrarionPage"
-             BackgroundImageSource="background.png">
-    <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
-                
-                <Grid  Margin="20,0,20,0"  VerticalOptions="CenterAndExpand">
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ mc:Ignorable="d"
+ Shell.NavBarIsVisible="False">
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <!--<StackLayout Grid.Row="0">
-                 <Entry Placeholder="UserName" FontSize="16" x:Name="EntryUserName"/>
-             </StackLayout>
-
-             <StackLayout Grid.Row="1">
-                 <Entry Placeholder="Password" IsPassword="True" FontSize="16" x:Name="EntryUserPassword"/>
-             </StackLayout>
-
-             <StackLayout Grid.Row="2">
-                 <Entry Placeholder="Email" FontSize="16" x:Name="EntryUserEmail"/>
-             </StackLayout>
-
-             <StackLayout Grid.Row="3">
-                 <Entry Placeholder="PhoneNumber" FontSize="16" x:Name="EntryUserPhoneNumber"/>
-             
-             </StackLayout>-->
-
-                    <StackLayout Grid.Row="1">
-
-                        <Label Text="Register" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+    <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <Image AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" Source="background.png" Aspect="AspectFill"/>
+        <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,1">
+            <Grid  Margin="20,0,20,0"  VerticalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackLayout>
+                    <Label Text="Registration: Choose your password"
+                 Margin="30"
+                 FontSize="18" 
+                 TextColor="#ffffff"
+                 HorizontalOptions="Center" 
+         />
+                    <StackLayout  Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Entry x:Name="Digit1" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" TextColor="White" BackgroundColor="Wheat"/>
+                        <Entry x:Name="Digit2" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" TextColor="White" BackgroundColor="Wheat"/>
+                        <Entry x:Name="Digit3" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" TextColor="White" BackgroundColor="Wheat"/>
+                        <Entry x:Name="Digit4" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" TextColor="White" BackgroundColor="Wheat"/>
                     </StackLayout>
-
-                    <StackLayout  Grid.Row="2" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="Wheat">
-                        <Entry x:Name="Digit1" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" />
-                        <Entry x:Name="Digit2" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" />
-                        <Entry x:Name="Digit3" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" />
-                        <Entry x:Name="Digit4" Placeholder="*" MaxLength="1" Keyboard="Numeric" IsPassword="true" WidthRequest="40" />
-                    </StackLayout>
-
-
-                    <!--<StackLayout Grid.Row="4">
-                 <Button Text="Register" HorizontalOptions="CenterAndExpand" TextColor="White" WidthRequest="50" BackgroundColor="Blue" Clicked="Button_Clicked"/>
-             </StackLayout>-->
-
-                </Grid>
-            </StackLayout>
-        </ScrollView>
-    </ContentPage.Content>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </AbsoluteLayout>
 </ContentPage>

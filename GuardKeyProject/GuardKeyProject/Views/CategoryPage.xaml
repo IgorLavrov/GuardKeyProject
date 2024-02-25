@@ -2,20 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:vm="clr-namespace:GuardKeyProject.ViewModels"
-             x:Class="GuardKeyProject.Views.CategoryPage">
+             x:Class="GuardKeyProject.Views.CategoryPage" 
+             BackgroundImageSource="background.png">
+             
         <ContentPage.BindingContext>
             <vm:CategoryViewModel/>
         </ContentPage.BindingContext>
         <ContentPage.Content>
-
+        
 
             <StackLayout Margin="5,30,5,5" >
-                <StackLayout>
-                    <Label Text="Event Management" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="20" FontAttributes="Bold" TextColor="Black" Margin="10"/>
+      
+            <StackLayout>
+                    <Label TextColor="White" Text="Event Management" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="20" FontAttributes="Bold" Margin="10"/>
                 </StackLayout>
                 <!--Add-->
                 <Frame IsVisible="{Binding IsViewDetail}" >
                     <StackLayout>
+                        
                         
                         <Entry x:Name="CategoryName" Text="{Binding CategoryName}" Placeholder="Category name" />
                         
