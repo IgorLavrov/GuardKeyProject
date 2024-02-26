@@ -14,17 +14,18 @@
         <ScrollView>
             <StackLayout>
                 <StackLayout Orientation="Horizontal" Padding="10">
-                    <Label Text="Filter Group:" 
+                    <Label Text="Filter Group:"                        
                            VerticalOptions="Center" 
                            TextColor="White"/>
                     <Picker ItemsSource="{Binding FilterOptions}" 
                             SelectedItem="{Binding SelectedFilter}" 
                             VerticalOptions="Center" 
-                            HorizontalOptions="FillAndExpand" 
-                            Background="wheat"/>
+                            HorizontalOptions="FillAndExpand"
+                            Background="Transparent"/>
                 </StackLayout>
-                <SearchBar Placeholder="Search" 
-                           BackgroundColor="Wheat" 
+                <SearchBar Placeholder="Search"
+                           PlaceholderColor="White"
+                           BackgroundColor="Transparent" 
                            TextColor="White" 
                            Text="{Binding SearchText}" 
                            SearchCommand="{Binding SearchCommand}" />
@@ -35,7 +36,10 @@
                     <CollectionView ItemsSource="{Binding UserRecords}"
                      SelectionMode="None">
                         <CollectionView.EmptyView>
-                            <Label Text="No Data Found !" HorizontalOptions="Center" FontAttributes="Italic" FontSize="Large"/>
+                            <Label Text="No Data Found !" 
+                                   HorizontalOptions="Center" 
+                                   FontAttributes="Italic" 
+                                   FontSize="Large"/>
                         </CollectionView.EmptyView>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
@@ -43,19 +47,28 @@
                                     <SwipeView>
                                         <SwipeView.RightItems>
                                             <SwipeItems>
-                                                <SwipeItem Text="Delete" BackgroundColor="Red"  Command="{Binding Source={RelativeSource AncestorType={x:Type local:UserRecordViewModel}},
+                                                <SwipeItem Text="Delete" 
+                                                           BackgroundColor="Red"  
+                                                           Command="{Binding Source={RelativeSource AncestorType={x:Type local:UserRecordViewModel}},
                                                     Path=UserRecordTappedDelete}" CommandParameter=" {Binding .}"/>
-
                                                 <SwipeItem IsDestructive="True" Text="Close" BackgroundColor="Green"/>
                                             </SwipeItems>
                                         </SwipeView.RightItems>
 
-                                        <Grid Padding="5">
-                                            <Frame CornerRadius="10" HasShadow="True"  BorderColor="Aqua" BackgroundColor="LightCoral">
+                                        <Grid>
+                                            <Frame CornerRadius="10" 
+                                                   HasShadow="True"  
+                                                   BorderColor="#BB2C7A"
+                                                   BackgroundColor="#1C0D2A">
                                                 <StackLayout Orientation="Horizontal">
                                                     <StackLayout >
-                                                        <Label Grid.Column="1" Text="{Binding SourceGroupName}" TextColor="DimGray"></Label>
-                                                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding ResourceName}" TextColor="DimGray" ></Label>
+                                                        <Label Grid.Column="1" 
+                                                               Text="{Binding SourceGroupName}" 
+                                                               TextColor="White"></Label>
+                                                        <Label Grid.Row="1" 
+                                                               Grid.Column="1" 
+                                                               Text="{Binding ResourceName}" 
+                                                               TextColor="White" ></Label>
                                                     </StackLayout>
                                                     <StackLayout VerticalOptions="Center" HorizontalOptions="EndAndExpand">
                                                         <Image Source="edit.png" Grid.Column="1" WidthRequest="30" HeightRequest="30" VerticalOptions="End">
@@ -73,7 +86,7 @@
                                 </StackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
-                        <CollectionView.Header>
+                        <!--<CollectionView.Header>
                             <StackLayout>
                                 <Label Text="Password Card" 
                                        FontSize="Large" 
@@ -91,7 +104,7 @@
                                Command="{Binding ClearRecordCommand}"
                                FontSize="Large" TextColor="Gray" HorizontalOptions="Center"/>
                             </StackLayout>
-                        </CollectionView.Footer>
+                        </CollectionView.Footer>-->
                     </CollectionView>
                 </RefreshView>
             </StackLayout>

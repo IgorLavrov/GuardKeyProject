@@ -35,41 +35,38 @@
                     <Label Text="List of Events" FontSize="Medium" TextColor="White"/>
                 </StackLayout>
 
-                <ListView x:Name="TaskList" ItemsSource="{Binding CategoryList, Mode=TwoWay}" IsVisible="True"
+            <ListView x:Name="TaskList" ItemsSource="{Binding CategoryList, Mode=TwoWay}" IsVisible="True"
                       SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
                       HasUnevenRows="True" BackgroundColor="Transparent" Margin="10"
                       SeparatorColor="Red" SelectionMode="Single">
-                    <ListView.Header>
-                        <StackLayout Orientation="Horizontal" BackgroundColor="DarkGray">
-                            <Button BackgroundColor="Transparent" TextTransform="None" TextColor="Green" FontAttributes="Bold" Text="Add" Command="{Binding cmdAddaTask}" />
-                            <Button BackgroundColor="Transparent" TextTransform="None" TextColor="Red" FontAttributes="Bold" Text="Delete" Command="{Binding cmdDeleteaTask}" />
-                            <Button BackgroundColor="Transparent" TextTransform="None" TextColor="DarkOrange" FontAttributes="Bold" Text="Update" Command="{Binding cmdUpdateaTask}" />
-                           
-
-                        </StackLayout>
-
-                    </ListView.Header>
+                <ListView.Header>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="DarkGray">
+                        <Button BackgroundColor="Transparent" TextTransform="None" TextColor="Green" FontAttributes="Bold" Text="Add" Command="{Binding cmdAddaTask}" />
+                        <Button BackgroundColor="Transparent" TextTransform="None" TextColor="Red" FontAttributes="Bold" Text="Delete" Command="{Binding cmdDeleteaTask}" />
+                        <Button BackgroundColor="Transparent" TextTransform="None" TextColor="DarkOrange" FontAttributes="Bold" Text="Update" Command="{Binding cmdUpdateaTask}" />
 
 
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
+                    </StackLayout>
+
+                </ListView.Header>
 
 
-
-                                <StackLayout Orientation="Vertical" Margin="10" BackgroundColor="LightBlue" >
-                                    <Label Text="Event" FontSize="Medium" TextColor="OrangeRed" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
-                                    <Label TextColor="Black" Text="{Binding CategoryName}"></Label>
-                                    
-
-                                </StackLayout>
-                            </ViewCell>
-
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-
-
-            </StackLayout>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" 
+                                         Margin="25" 
+                                         BackgroundColor="Transparent" >
+                                <Label TextColor="White" 
+                                       FontAttributes="Bold" 
+                                       TextTransform="Uppercase" 
+                                       Text="{Binding CategoryName}"  
+                                       VerticalOptions="CenterAndExpand"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
         </ContentPage.Content>
 </ContentPage>
