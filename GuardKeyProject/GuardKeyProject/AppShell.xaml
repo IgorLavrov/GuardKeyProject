@@ -73,8 +73,10 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-
     <FlyoutItem Title="Main" Icon="icon_feed.png">
+        <ShellContent Title="List" Route="ListPage" ContentTemplate="{DataTemplate local:ListPage}" />
+    </FlyoutItem>
+        <FlyoutItem Title="Main" Icon="icon_feed.png">
         <ShellContent Title="Main" Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
         <ShellContent Title="Add" Route="AddUserRecordPage" ContentTemplate="{DataTemplate local:AddUserRecordPage}" />
         <ShellContent Title="Categories" Route="CategoryPage" ContentTemplate="{DataTemplate local:CategoryPage}" />

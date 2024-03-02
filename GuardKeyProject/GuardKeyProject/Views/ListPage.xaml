@@ -1,12 +1,120 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+    
+
+    <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GuardKeyProject.Views.ListPage"
+             xmlns:local="clr-namespace:GuardKeyProject.ViewModels"
+             xmlns:model="clr-namespace:GuardKeyProject.Models"
+             BackgroundImageSource="background.png">
+
+        <ContentPage.Content>
+            <StackLayout>
+          
+                <StackLayout>
+                    <!--<ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="Gray" />-->
+                    <Button Text="Refresh" Command="{Binding LoadUserRecordCommand}" IsEnabled="True" />
+                </StackLayout>
+            <ScrollView>
+
+                <CollectionView ItemsSource="{Binding GroupedUserRecords}"
+                            SelectionMode="None"
+                            IsGrouped="True">
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <StackLayout BackgroundColor="#2B2B2B" Padding="10">
+                                <Label Text="{Binding Key}" TextColor="Gold" FontAttributes="Bold"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout x:DataType="model:UserRecord">
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout>
+                                        <Label Text="{Binding ResourceName}" TextColor="White"/>
+                                    </StackLayout>
+                                    <StackLayout VerticalOptions="Center" HorizontalOptions="EndAndExpand">
+                                        <Image Source="edit.png" WidthRequest="30" HeightRequest="30" VerticalOptions="End">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:UserRecordViewModel}}, Path=UserRecordTappedEdit}"
+                                                                CommandParameter="{Binding .}"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                    <CollectionView.Header>
+                        <StackLayout>
+                            <Label Text="Password Card" FontSize="Large" TextColor="Gold" HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </CollectionView.Header>
+                </CollectionView>
+                </ScrollView>
+        </StackLayout>
+        </ContentPage.Content>
+    </ContentPage>
+
+
+    <!--<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GuardKeyProject.Views.ListPage">
+             x:Class="GuardKeyProject.Views.ListPage"
+             xmlns:local="clr-namespace:GuardKeyProject.ViewModels"
+             xmlns:model="clr-namespace:GuardKeyProject.Models"
+             BackgroundImageSource="background.png">
+    
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <ScrollView>
+                <RefreshView 
+                    Command="{Binding LoadUserRecordCommand}" IsRefreshing="{Binding IsBusy, Mode=
+                    OneWay}">
+                    <CollectionView ItemsSource="{Binding GroupedUserRecords}"
+                                    SelectionMode="None"
+                                    IsGrouped="True">
+                        <CollectionView.GroupHeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout BackgroundColor="#2B2B2B" Padding="10">
+                                    <Label Text="{Binding Key}" TextColor="Gold" FontAttributes="Bold"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.GroupHeaderTemplate>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout x:DataType="model:UserRecord">
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout>
+                                            <Label Text="{Binding ResourceName}" TextColor="White"/>
+                                        </StackLayout>
+                                        <StackLayout VerticalOptions="Center" HorizontalOptions="EndAndExpand">
+                                            <Image Source="edit.png" WidthRequest="30" HeightRequest="30" VerticalOptions="End">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:UserRecordViewModel}}, Path=UserRecordTappedEdit}"
+                                                                        CommandParameter="{Binding .}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                        <CollectionView.Header>
+                            <StackLayout>
+                                <Label Text="Password Card" FontSize="Large" TextColor="Gold" HorizontalOptions="Center"/>
+                            </StackLayout>
+                        </CollectionView.Header>
+                    </CollectionView>
+                </RefreshView>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
-</ContentPage>
+</ContentPage>-->

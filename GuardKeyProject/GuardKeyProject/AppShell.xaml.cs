@@ -13,7 +13,10 @@ namespace GuardKeyProject
         public AppShell()
         {
             InitializeComponent();
-          
+
+
+            Routing.RegisterRoute(nameof(ListPage), typeof(ListPage));
+
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(AddUserRecordPage), typeof(AddUserRecordPage));
             Routing.RegisterRoute(nameof(CategoryPage), typeof(CategoryPage));

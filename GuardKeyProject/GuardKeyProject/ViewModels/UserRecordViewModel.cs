@@ -4,6 +4,7 @@ using GuardKeyProject.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -37,8 +38,20 @@ namespace GuardKeyProject.ViewModels
             }
         }
 
-    
+        public string Key { get; set; }
         public ObservableCollection<string> FilterOptions { get; set; }
+
+        private ObservableCollection<GroupedUserRecord> _groupedUserRecords;
+        public ObservableCollection<GroupedUserRecord> GroupedUserRecords
+        {
+            get { return _groupedUserRecords; }
+            set
+            {
+                _groupedUserRecords = value;
+                OnPropertyChanged(nameof(GroupedUserRecords));
+            }
+        }
+
         private ObservableCollection<UserRecord> _userRecord;
         public ObservableCollection<UserRecord> UserRecords
         {
@@ -50,16 +63,7 @@ namespace GuardKeyProject.ViewModels
             }
         }
 
-        //private ObservableCollection<UserRecord> _userRecord;
-        //public ObservableCollection<UserRecord> UserRecords
-        //{
-        //    get { return _userRecord; }
-        //    set
-        //    {
-        //        _userRecord = value;
-        //        OnPropertyChanged(nameof(UserRecords));
-        //    }
-        //}
+     
 
         string selectedFilter = "All";
         public string SelectedFilter
@@ -72,6 +76,7 @@ namespace GuardKeyProject.ViewModels
             }
         }
 
+    
 
 
         private async void InitializeFilterOptionsAsync()
@@ -93,6 +98,7 @@ namespace GuardKeyProject.ViewModels
             UserRecords = new ObservableCollection<UserRecord>();
             AddUserRecordCommand = new Command(OnAddUserRecord);
             UserRecordTappedEdit=new Command<UserRecord> (OnEditUserRecord);
+            GroupedUserRecords = new ObservableCollection<GroupedUserRecord>();
             UserRecordTappedDelete = new Command<UserRecord>(OnDeleteUserRecord);
             ClearRecordCommand = new Command(ClearRecord);
             SearchCommand = new Command(ExecuteSearch);
@@ -101,6 +107,12 @@ namespace GuardKeyProject.ViewModels
 
 
         }
+
+        public UserRecordViewModel()
+        {
+           
+        }
+
         public async Task RefreshFilterOptionsAsync()
         {
             var categories = await App.CategoryService.GetCategoriesAsync();
@@ -147,6 +159,7 @@ namespace GuardKeyProject.ViewModels
         }
     
 
+
         private async void ExecuteSearch()
         {
             string searchText = SearchText;
@@ -178,35 +191,9 @@ namespace GuardKeyProject.ViewModels
 
 
 
-        //private async void ExecuteSearch()
-        //{
+    
 
-        //    string searchText = SearchText;
-        //    if (string.IsNullOrEmpty(searchText))
-        //    {
-        //        UserRecords.Clear();
-        //        var prodlist = await App.Database.GetUserRecordsAsync();
-        //        foreach (var prod in prodlist)
-        //        {
-        //            UserRecords.Add(prod);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        UserRecords.Clear();
-        //        var prodlist = await App.Database.SortRecord(searchText);
-        //        foreach (var prod in prodlist)
-        //        {
-        //            UserRecords.Add(prod);
-        //        }
-
-        //    }
-
-        //    //FilteredItems = new ObservableCollection<UserRecord>(UserRecords.Where(value => value.SourceGroupName.Contains(searchText)));
-
-        //}
-
-        private void ClearRecord()
+        public void ClearRecord()
         {
             UserRecords.Clear();
         }
@@ -223,11 +210,10 @@ namespace GuardKeyProject.ViewModels
 
         private async void OnEditUserRecord(UserRecord record)
         {
+           
             await Navigation.PushAsync(new AddUserRecordPage(record));
         }
 
-        /// <summary>
-        /// // review
 
         private async void OnAddUserRecord(object obj)
         {
@@ -240,29 +226,61 @@ namespace GuardKeyProject.ViewModels
             IsBusy = true;
         }
 
-        async Task ExecuteLoadUserRecordCommand()
-        {
+        //async Task ExecuteLoadUserRecordCommand()
+        //{
            
 
+        //    IsBusy = true;
+        //    try
+        //    {
+
+        //        UserRecords.Clear();
+        //        var prodlist = await App.Database.GetUserRecordsAsync();
+        //        foreach (var prod in prodlist)
+        //        {
+        //            UserRecords.Add(prod);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex);
+        //    }
+        //    finally
+        //    { IsBusy = false; }
+        //}
+
+        async Task ExecuteLoadUserRecordCommand()
+        {
             IsBusy = true;
             try
             {
-
-                UserRecords.Clear();
                 var prodlist = await App.Database.GetUserRecordsAsync();
+
+                // Update UserRecords with the loaded records
+                UserRecords.Clear();
                 foreach (var prod in prodlist)
                 {
                     UserRecords.Add(prod);
                 }
+
+                // Group the user records
+                var groupedRecords = UserRecords
+                    .GroupBy(record => record.SourceGroupName)
+                    .Select(group => new GroupedUserRecord(group.Key, group.ToList()));
+
+                // Update GroupedUserRecords with the grouped records
+                GroupedUserRecords = new ObservableCollection<GroupedUserRecord>(groupedRecords);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
             }
             finally
-            { IsBusy = false; }
+            {
+                IsBusy = false;
+            }
         }
-
+       
 
     }
 }

@@ -1,10 +1,12 @@
 ﻿using GuardKeyProject.Models;
+using GuardKeyProject.Services;
 using GuardKeyProject.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace GuardKeyProject.ViewModels
@@ -43,13 +45,17 @@ namespace GuardKeyProject.ViewModels
 
             UserRecord = new UserRecord();
         }
+
+       
         private async void OnSave()
         {
             var record = UserRecord;
             await App.Database.AddUserRecordAsync(record);
 
+            //await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}?createTab=true");
+            await NavigationService.GoBackAsync();
 
-            await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}");
+            //await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}");
 
             //var navigationPage = Application.Current.MainPage as NavigationPage;
             //await navigationPage?.Navigation.PushAsync(new UserRecordPage());
@@ -57,8 +63,12 @@ namespace GuardKeyProject.ViewModels
 
         private async void OnCancel()
         {
-           //await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}");
-            Shell.Current.GoToAsync("..");
+
+            await NavigationService.GoBackAsync();
+            //await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}?createTab=true");
+
+            //await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}");
+            //Shell.Current.GoToAsync("..");
             //var navigationPage = Application.Current.MainPage as NavigationPage;
             //await navigationPage?.Navigation.PushAsync(new UserRecordPage());
         }

@@ -9,8 +9,9 @@ namespace GuardKeyProject.Droid
 {
     //[Activity(Label = "GuardKeyProject", Icon = "@drawable/test",  Theme = "@style/MainTheme.Launcher", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
     //[Activity(Label = "GuardKeyProject", Icon = "@drawable/test", Theme = "@style/MainTheme.Splash", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.ScreenLayout)]
+    // [Activity(Label = "GuardKeyProject", Theme = "@style/MainTheme", MainLauncher =true)]
 
-    [Activity(Label = "GuardKeyProject", Theme = "@style/MainTheme", MainLauncher =true)]
+    [Activity(Label = "GuardKeyProject", Icon = "@drawable/test",MainLauncher =true,  Theme = "@style/MainTheme.Launcher")]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)

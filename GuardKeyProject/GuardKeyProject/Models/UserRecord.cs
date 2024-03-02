@@ -18,5 +18,19 @@ namespace GuardKeyProject.Models
             public string Password { get; set; }
             public string Description { get; set; }
         }
-    
+
+
+
+    public class GroupedUserRecord : List<UserRecord>
+    {
+        public string Key { get; private set; }
+
+
+        public GroupedUserRecord(string key, IEnumerable<UserRecord> items) : base(items)
+        {
+            Key = key;
+        }
+    }
 }
+
+

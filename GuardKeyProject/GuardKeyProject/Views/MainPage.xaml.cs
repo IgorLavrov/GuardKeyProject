@@ -85,15 +85,15 @@ namespace GuardKeyProject.Views
 
         private async void Button_Get_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}");
+            await Shell.Current.GoToAsync($"{nameof(UserRecordPage)}");
         }
         private async void Button_Edit_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}");
+            await Shell.Current.GoToAsync($"{nameof(UserRecordPage)}");
         }
         private async void Button_Delete_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}");
+            await Shell.Current.GoToAsync($"{nameof(UserRecordPage)}");
         }
     }
 }

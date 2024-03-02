@@ -2,6 +2,7 @@
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,21 +57,23 @@ namespace GuardKeyProject.Services
         public async Task<IEnumerable<UserRecord>> GetUserRecordsAsync()
         {
             return await Task.FromResult(await _database.Table<UserRecord>().ToListAsync());
+        
+
         }
 
         public async Task<bool> UpdateUserRecordAsync(UserRecord record)
         {
-            throw new NotImplementedException();
-            //if (record.Id > 0)
-            //{
-            //    await _database.UpdateAsync(record);
-            //}
-            //else
-            //{
-            //    await _database.InsertAsync(record);
 
-            //}
-            //return await Task.FromResult(true);
+            if (record.Id > 0)
+            {
+                await _database.UpdateAsync(record);
+            }
+            else
+            {
+                await _database.InsertAsync(record);
+
+            }
+            return await Task.FromResult(true);
         }
 
     }
