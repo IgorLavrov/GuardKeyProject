@@ -15,11 +15,20 @@
                     <!--<ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="Gray" />-->
                     <Button Text="Refresh" Command="{Binding LoadUserRecordCommand}" IsEnabled="True" />
                 </StackLayout>
+        
             <ScrollView>
+                
 
                 <CollectionView ItemsSource="{Binding GroupedUserRecords}"
                             SelectionMode="None"
                             IsGrouped="True">
+                    <CollectionView.EmptyView>
+                        <Label Text="Please refresh the page !" 
+           HorizontalOptions="Center" 
+           FontAttributes="Italic" 
+           FontSize="Large"
+           TextColor="White"/>
+                    </CollectionView.EmptyView>
                     <CollectionView.GroupHeaderTemplate>
                         <DataTemplate>
                             <StackLayout BackgroundColor="#2B2B2B" Padding="10">

@@ -36,7 +36,7 @@
                     <CollectionView ItemsSource="{Binding UserRecords}"
                      SelectionMode="None">
                         <CollectionView.EmptyView>
-                            <Label Text="No Data Found !" 
+                            <Label Text="Choose your search option !" 
                                    HorizontalOptions="Center" 
                                    FontAttributes="Italic" 
                                    FontSize="Large"
