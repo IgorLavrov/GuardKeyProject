@@ -76,5 +76,21 @@ namespace GuardKeyProject.Services
             return await _database.Table<Category>().ToListAsync();
           
         }
+
+       
+
+        public async Task<List<Category>> FilterCategoriesAsync(string selectedFilter)
+        {
+            if (selectedFilter == "All")
+            {
+                // Return all categories
+                return await _database.Table<Category>().ToListAsync();
+            }
+            else
+            {
+                // Return categories filtered by the selected option
+                return await _database.Table<Category>().Where(c => c.CategoryName == selectedFilter).ToListAsync();
+            }
+        }
     }
 }

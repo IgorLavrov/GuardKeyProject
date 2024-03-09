@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:GuardKeyProject.ViewModels"
+            xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+
+             x:Class="GuardKeyProject.Views.ListCategories" 
+             BackgroundImageSource="background.png"
+             Title="{Binding SelectedFilter, StringFormat='All Categories - {0}'}">
+
+    <ContentPage.BindingContext>
+        <vm:CategoryViewModel/>
+    </ContentPage.BindingContext>
+
+
+
+    <StackLayout Margin="5,30,5,5">
+        
+            <Frame  Background="Transparent">
+            <StackLayout Orientation="Horizontal" Padding="10">
+                <Label Text="Filter" VerticalOptions="Center" TextColor="White"/>
+                    <Picker ItemsSource="{Binding CategoryList}" 
+                    SelectedItem="{Binding SelectedFilter}" 
+                    VerticalOptions="Center" 
+                    HorizontalOptions="FillAndExpand"
+                    TextColor="White">
+                        <Picker.ItemDisplayBinding>
+                            <Binding Path="CategoryName"/>
+                        </Picker.ItemDisplayBinding>
+                    </Picker>
+                </StackLayout>
+            </Frame>
+
+
+        <ListView x:Name="TaskList"
+          ItemsSource="{Binding CategoryList, Mode=TwoWay}"
+          SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+          HasUnevenRows="True" BackgroundColor="Transparent" Margin="10"
+          SeparatorColor="Red" SelectionMode="Single">
+            <ListView.Behaviors>
+                <xct:EventToCommandBehavior EventName="ItemTapped" 
+                                    Command="{Binding OpenCategoryPageCommand}" 
+                                    CommandParameter="{Binding .}" />
+            </ListView.Behaviors>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Margin="25" BackgroundColor="Transparent">
+                            <Image Source="Ellipse1.png" WidthRequest="30" HeightRequest="30" VerticalOptions="End"/>
+                            <Label TextColor="White" FontAttributes="Bold" TextTransform="Uppercase" Text="{Binding CategoryName}" VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

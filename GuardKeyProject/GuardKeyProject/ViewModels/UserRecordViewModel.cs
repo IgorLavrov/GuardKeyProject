@@ -13,7 +13,7 @@ using Xamarin.Forms;
 
 namespace GuardKeyProject.ViewModels
 {
-    public class UserRecordViewModel: BaseUserRecordViewModel
+    public class UserRecordViewModel: CategoryViewModel
     {
         public Command LoadUserRecordCommand { get; }
         public Command AddUserRecordCommand { get; }

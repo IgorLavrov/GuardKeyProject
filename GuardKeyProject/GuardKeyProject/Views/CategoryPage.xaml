@@ -14,7 +14,7 @@
             <StackLayout Margin="5,30,5,5" >
       
             <StackLayout>
-                    <Label TextColor="White" Text="Event Management" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="20" FontAttributes="Bold" Margin="10"/>
+                    <Label TextColor="White" Text="Category Management" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="20" FontAttributes="Bold" Margin="10"/>
                 </StackLayout>
                 <!--Add-->
                 <Frame IsVisible="{Binding IsViewDetail}" >
@@ -32,7 +32,7 @@
                 </Frame>
 
                 <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                    <Label Text="List of Events" FontSize="Medium" TextColor="White"/>
+                    <Label Text="Menu Option" FontSize="Medium" TextColor="White"/>
                 </StackLayout>
 
             <ListView x:Name="TaskList" ItemsSource="{Binding CategoryList, Mode=TwoWay}" IsVisible="True"

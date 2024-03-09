@@ -1,15 +1,21 @@
 ﻿using GuardKeyProject.Models;
+using GuardKeyProject.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace GuardKeyProject.ViewModels
 {
-    public class CategoryViewModel : INotifyPropertyChanged
+    public class CategoryViewModel : BaseUserRecordViewModel,INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -48,20 +54,22 @@ namespace GuardKeyProject.ViewModels
         }
 
 
-        private List<Category> categoryList;
-        public List<Category> CategoryList
-        {
-            get { return categoryList; }
-            set
-            {
+        //private List<Category> categoryList;
+        //public List<Category> CategoryList
+        //{
+        //    get { return categoryList; }
+        //    set
+        //    {
 
 
-                categoryList = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CategoryList"));
+        //        categoryList = value;
+        //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CategoryList"));
 
 
-            }
-        }
+        //    }
+        //}
+
+    
 
         private Category selectedCategory;
         public Category SelectedCategory
@@ -73,6 +81,16 @@ namespace GuardKeyProject.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedCategory"));
             }
         }
+        private ObservableCollection<Category> categoryList;
+        public ObservableCollection<Category> CategoryList
+        {
+            get { return categoryList; }
+            set
+            {
+                categoryList = value;
+                OnPropertyChanged(nameof(CategoryList));
+            }
+        }
         //------------
         public Command cmdProcessTask { get; set; }
         public Command cmdCancelTask { get; set; }
@@ -81,6 +99,8 @@ namespace GuardKeyProject.ViewModels
         public Command cmdDeleteaTask { get; set; }
         public Command cmdUpdateaTask { get; set; }
         public Command cmdMapTask { get; set; }
+        public Command OpenCategoryPageCommand { get; set; }
+
 
         public CategoryViewModel()
         {
@@ -90,6 +110,8 @@ namespace GuardKeyProject.ViewModels
             cmdAddaTask = new Command(AddCategories);
             cmdDeleteaTask = new Command(DeleteCategories);
             cmdUpdateaTask = new Command(UpdateaTask);
+            OpenCategoryPageCommand = new Command(OpenCategoryPage);
+
             getCategories();
          
 
@@ -187,9 +209,75 @@ namespace GuardKeyProject.ViewModels
         }
         public async void getCategories()
         {
-            CategoryList = await App.CategoryService.GetAllCategoriesAsync();
+            var categories = await App.CategoryService.GetAllCategoriesAsync();
+
+            // Convert List<Category> to ObservableCollection<Category>
+            var observableCollection = new ObservableCollection<Category>(categories);
+
+            // Assign the ObservableCollection to CategoryList
+            CategoryList = observableCollection;
         }
 
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private string selectedFilter="All";
+        public string SelectedFilter
+        {
+            get => selectedFilter;
+            set
+            {
+                if (setProperty(ref selectedFilter, value))
+                    FilterItemsAsync();
+                OnPropertyChanged(nameof(SelectedFilter));
+            }
+        }
+
+        public async Task FilterItemsAsync()
+        {
+            
+            // Implement your filtering logic based on the selected filter
+            // For example, you can update the CategoryList property with filtered data
+
+            if (string.IsNullOrEmpty(selectedFilter) || selectedFilter == "All")
+            {
+                // Reset the filter and retrieve all categories
+                getCategories();
+            }
+            else
+            {
+                var filteredCategories = await App.CategoryService.FilterCategoriesAsync(selectedFilter);
+                CategoryList = new ObservableCollection<Category>(filteredCategories);
+            }
+        }
+
+        private int tapCount = 0;
+        private const int maxTapCount = 2;
+        private const int resetIntervalMilliseconds = 500; // Adjust the interval as needed
+
+        private async void OpenCategoryPage(object obj)
+        {
+            tapCount++;
+
+            if (tapCount == 1)
+            {
+                // First tap, start the timer to reset the tap count
+                Device.StartTimer(TimeSpan.FromMilliseconds(resetIntervalMilliseconds), () =>
+                {
+                    tapCount = 0;
+                    return false; // Stop the timer
+                });
+            }
+            else if (tapCount == maxTapCount)
+            {
+                // Second tap, navigate to the new page
+                await Shell.Current.GoToAsync($"{nameof(ListPage)}");
+                //await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}");
+                tapCount = 0; // Reset tap count after navigation
+            }
+        }
 
 
 

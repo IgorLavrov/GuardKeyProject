@@ -17,7 +17,7 @@ namespace GuardKeyProject.Views
 
             InitializeComponent();
 
-            this.Title = "Select Option";
+            this.Title = "Menu";
             StackLayout stackLayout = new StackLayout();
 
             var absoluteLayout = new AbsoluteLayout();
@@ -33,7 +33,7 @@ namespace GuardKeyProject.Views
             absoluteLayout.Children.Add(backgroundImage);
 
             Button button = new Button();
-            button.Text = "Add Cart";
+            button.Text = "Add new Record";
             button.HeightRequest = 60;
             button.WidthRequest = 170;
             button.BackgroundColor = Color.Goldenrod;
@@ -41,7 +41,7 @@ namespace GuardKeyProject.Views
             stackLayout.Children.Add(button);
 
             button = new Button();
-            button.Text = "Get";
+            button.Text = "Search";
             button.HeightRequest = 60;
             button.WidthRequest = 170;
             button.BackgroundColor = Color.Goldenrod;
@@ -57,7 +57,7 @@ namespace GuardKeyProject.Views
             stackLayout.Children.Add(button);
 
             button = new Button();
-            button.Text = "Delete";
+            button.Text = "Write database on file";
             button.HeightRequest = 60;
             button.WidthRequest = 170;
             button.BackgroundColor = Color.Goldenrod;
@@ -85,11 +85,11 @@ namespace GuardKeyProject.Views
 
         private async void Button_Get_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync($"{nameof(UserRecordPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}");
         }
         private async void Button_Edit_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync($"{nameof(UserRecordPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}");
         }
         private async void Button_Delete_Clicked(object sender, EventArgs e)
         {

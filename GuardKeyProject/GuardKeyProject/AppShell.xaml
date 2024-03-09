@@ -72,17 +72,29 @@
             </Style>
         </ResourceDictionary>
     </Shell.Resources>
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <StackLayout>
+                <!-- Add your image here -->
+                <Image Source="logo.png" Aspect="AspectFill" HeightRequest="150" />
 
-    <FlyoutItem Title="Main" Icon="icon_feed.png">
-        <ShellContent Title="List" Route="ListPage" ContentTemplate="{DataTemplate local:ListPage}" />
-    </FlyoutItem>
-        <FlyoutItem Title="Main" Icon="icon_feed.png">
-        <ShellContent Title="Main" Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
-        <ShellContent Title="Add" Route="AddUserRecordPage" ContentTemplate="{DataTemplate local:AddUserRecordPage}" />
+                <!-- You can also add other UI elements below the image if needed -->
+                <Label Text="Welcome to Menu page" FontSize="20" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" />
+            </StackLayout>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+    <FlyoutItem Title="Category" Icon="icon_feed.png">
+        <ShellContent Title="List" Route="ListCategories" ContentTemplate="{DataTemplate local:ListCategories}" />
         <ShellContent Title="Categories" Route="CategoryPage" ContentTemplate="{DataTemplate local:CategoryPage}" />
     </FlyoutItem>
+        <FlyoutItem Title="Search" Icon="icon_feed.png">
+        <ShellContent Title="Main" Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
+        <ShellContent Title="Add" Route="AddUserRecordPage" ContentTemplate="{DataTemplate local:AddUserRecordPage}" />
+        <ShellContent Route="UserRecordPage" Title="Advance Search" ContentTemplate="{DataTemplate local:UserRecordPage}" />
+    </FlyoutItem>
     <FlyoutItem Title="Records" Icon="icon_feed.png">
-        <ShellContent Route="UserRecordPage" ContentTemplate="{DataTemplate local:UserRecordPage}" />
+        <ShellContent Route="ListPage" ContentTemplate="{DataTemplate local:ListPage}" />
     </FlyoutItem>
 
 

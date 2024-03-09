@@ -53,8 +53,13 @@ namespace GuardKeyProject.ViewModels
             await App.Database.AddUserRecordAsync(record);
 
             //await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}?createTab=true");
-            await NavigationService.GoBackAsync();
-
+            try
+            {
+                await NavigationService.GoBackAsync();
+            }catch
+            {
+                await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}");
+            }
             //await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}");
 
             //var navigationPage = Application.Current.MainPage as NavigationPage;
