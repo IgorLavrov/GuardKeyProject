@@ -22,7 +22,11 @@ namespace GuardKeyProject.Views
             BindingContext = new CategoryViewModel();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+           
+        }
 
-      
     }
 }

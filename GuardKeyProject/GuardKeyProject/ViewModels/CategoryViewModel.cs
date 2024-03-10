@@ -41,7 +41,8 @@ namespace GuardKeyProject.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TypeCommand"));
             }
         }
-        //----------------------------------------
+       
+
         private string categoryName;
         public string CategoryName
         {
@@ -54,22 +55,7 @@ namespace GuardKeyProject.ViewModels
         }
 
 
-        //private List<Category> categoryList;
-        //public List<Category> CategoryList
-        //{
-        //    get { return categoryList; }
-        //    set
-        //    {
 
-
-        //        categoryList = value;
-        //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CategoryList"));
-
-
-        //    }
-        //}
-
-    
 
         private Category selectedCategory;
         public Category SelectedCategory
@@ -81,6 +67,8 @@ namespace GuardKeyProject.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedCategory"));
             }
         }
+
+
         private ObservableCollection<Category> categoryList;
         public ObservableCollection<Category> CategoryList
         {
@@ -91,7 +79,7 @@ namespace GuardKeyProject.ViewModels
                 OnPropertyChanged(nameof(CategoryList));
             }
         }
-        //------------
+     
         public Command cmdProcessTask { get; set; }
         public Command cmdCancelTask { get; set; }
         //-----------
@@ -106,7 +94,7 @@ namespace GuardKeyProject.ViewModels
         {
             cmdProcessTask = new Command(ProcessCategories);
             cmdCancelTask = new Command(CancelCategories);
-            //------------------
+  
             cmdAddaTask = new Command(AddCategories);
             cmdDeleteaTask = new Command(DeleteCategories);
             cmdUpdateaTask = new Command(UpdateaTask);
@@ -124,7 +112,6 @@ namespace GuardKeyProject.ViewModels
             if (selectedCategory != null)
             {
                 CategoryName = selectedCategory.CategoryName;
-
 
             }
             else
@@ -150,24 +137,11 @@ namespace GuardKeyProject.ViewModels
                 await Application.Current.MainPage.DisplayAlert("Cannot Delete", "The 'All' option cannot be deleted.", "OK");
             }
 
-
-            //IsViewDetail = true;
-            //TypeCommand = "Delete";
-            //if (selectedCategory != null)
-            //{
-            //    CategoryName = selectedCategory.CategoryName;
-
-            //}
-            //else
-            //{
-            //    IsViewDetail = false;
-            //    typeCommand = string.Empty;
-            //}
-
         }
 
-        private void AddCategories(object obj)
+        private async void AddCategories(object obj)
         {
+            
             IsViewDetail = true;
             TypeCommand = "Add";
             CategoryName = string.Empty;
@@ -181,18 +155,39 @@ namespace GuardKeyProject.ViewModels
 
         private async void ProcessCategories(object obj)
         {
+            List<string> categoriesNames = new List<string>();
+            categoriesNames = await App.CategoryService.GetCategoriesAsync();
+
+            if (TypeCommand =="Add" || TypeCommand == "Update")
+            {
+                foreach (var item in categoriesNames)
+                {
+                    if (item == CategoryName)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Cannot Add", "Such category already existed.", "OK");
+                        typeCommand = string.Empty;
+                        break;
+
+                    }
+                }
+            }
 
             if (TypeCommand == "Add")
             {
-                var r = await App.CategoryService.SaveCategoriesAsync(new Category
-                {
-                    CategoryName = CategoryName,
+                
+                  
+                        var r = await App.CategoryService.SaveCategoriesAsync(new Category
+                        {
+                            CategoryName = CategoryName,
 
-                });
-
+                        });
+                    
+                
             }
+
             else if (TypeCommand == "Update")
             {
+
                 selectedCategory.CategoryName = CategoryName;
 
                 await App.CategoryService.UpdateCategoriesAsync(SelectedCategory);
@@ -202,11 +197,14 @@ namespace GuardKeyProject.ViewModels
             {
                 await App.CategoryService.DeleteCategoriesAsync(SelectedCategory);
             }
+               
+        
             IsViewDetail = false;
             typeCommand = string.Empty;
             selectedCategory = null;
             getCategories();
         }
+
         public async void getCategories()
         {
             var categories = await App.CategoryService.GetAllCategoriesAsync();
@@ -223,65 +221,84 @@ namespace GuardKeyProject.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private string selectedFilter="All";
-        public string SelectedFilter
-        {
-            get => selectedFilter;
-            set
-            {
-                if (setProperty(ref selectedFilter, value))
-                    FilterItemsAsync();
-                OnPropertyChanged(nameof(SelectedFilter));
-            }
-        }
+        //private string selectedFilter { get; set; }
+        //public string SelectedFilter
+        //{
+        //    get => selectedFilter;
+        //    set
+        //    {
+        //        if (selectedFilter != value)
+        //        {
+        //            selectedFilter = value;
+        //            OnPropertyChanged(nameof(SelectedFilter));
+        //            FilterItemsAsync();
+        //        }
+        //    }
+        //}
 
-        public async Task FilterItemsAsync()
-        {
-            
-            // Implement your filtering logic based on the selected filter
-            // For example, you can update the CategoryList property with filtered data
+        //private ObservableCollection<Category> categoryList;
+        //public ObservableCollection<Category> CategoryList
+        //{
+        //    get { return categoryList; }
+        //    set
+        //    {
+        //        categoryList = value;
+        //        OnPropertyChanged(nameof(CategoryList));
 
-            if (string.IsNullOrEmpty(selectedFilter) || selectedFilter == "All")
-            {
-                // Reset the filter and retrieve all categories
-                getCategories();
-            }
-            else
-            {
-                var filteredCategories = await App.CategoryService.FilterCategoriesAsync(selectedFilter);
-                CategoryList = new ObservableCollection<Category>(filteredCategories);
-            }
-        }
+        //    }
+        //}
+
+        //private Category selectedCategory;
+        //public Category SelectedCategory
+        //{
+        //    get { return selectedCategory; }
+        //    set
+        //    {
+        //        selectedCategory = value;
+        //        OnPropertyChanged(nameof(SelectedCategory));
+        //    }
+        //}
+
+        //public async Task FilterItemsAsync()
+        //{
+        //    if (string.IsNullOrEmpty(SelectedFilter) || SelectedFilter == "All")
+        //    {
+        //        // Reset the filter and retrieve all categories
+        //        getCategories();
+        //    }
+        //    else
+        //    {
+        //        CategoryList.Clear();
+        //        IEnumerable<Category> filteredRecords;
+        //        // Filter records based on the selected option
+        //        filteredRecords = await App.CategoryService.FilterCategoriesAsync(SelectedFilter);
+
+        //        // Directly assign the filtered records to CategoryList
+        //        CategoryList = new ObservableCollection<Category>(filteredRecords);
+        //    }
+        //}
+
+
+
 
         private int tapCount = 0;
-        private const int maxTapCount = 2;
+        private const int maxTapCount = 1;
         private const int resetIntervalMilliseconds = 500; // Adjust the interval as needed
 
         private async void OpenCategoryPage(object obj)
         {
             tapCount++;
 
-            if (tapCount == 1)
+          
+            if (tapCount == maxTapCount)
             {
-                // First tap, start the timer to reset the tap count
-                Device.StartTimer(TimeSpan.FromMilliseconds(resetIntervalMilliseconds), () =>
-                {
-                    tapCount = 0;
-                    return false; // Stop the timer
-                });
-            }
-            else if (tapCount == maxTapCount)
-            {
-                // Second tap, navigate to the new page
-                await Shell.Current.GoToAsync($"{nameof(ListPage)}");
+               
+             
+               await Shell.Current.GoToAsync($"{nameof(ListPage)}");
                 //await Shell.Current.GoToAsync($"//{nameof(UserRecordPage)}");
                 tapCount = 0; // Reset tap count after navigation
             }
         }
-
-
-
-
 
     }
 }

@@ -6,7 +6,8 @@
 
              x:Class="GuardKeyProject.Views.ListCategories" 
              BackgroundImageSource="background.png"
-             Title="{Binding SelectedFilter, StringFormat='All Categories - {0}'}">
+             Title="Categories">
+             <!--Title="{Binding SelectedFilter, StringFormat='All Categories - {0}'}">-->
 
     <ContentPage.BindingContext>
         <vm:CategoryViewModel/>
@@ -15,21 +16,48 @@
 
 
     <StackLayout Margin="5,30,5,5">
-        
-            <Frame  Background="Transparent">
+
+        <Frame Background="Transparent">
+            <StackLayout Orientation="Horizontal" Padding="10">
+                <Label Text="Filter" VerticalOptions="Center" TextColor="White" />
+                <Picker x:Name="picker"
+                        ItemsSource="{Binding CategoryList}"
+                        SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="FillAndExpand"
+                        TextColor="White">
+                    <Picker.ItemDisplayBinding>
+                        <Binding Path="CategoryName" />
+                    </Picker.ItemDisplayBinding>
+                </Picker>
+            </StackLayout>
+        </Frame>
+        <!--<Frame Background="Transparent">
+            <StackLayout Orientation="Horizontal" Padding="10">
+                <Label Text="Filter" VerticalOptions="Center" TextColor="White" />
+                <Picker ItemsSource="{Binding CategoryList}"
+                SelectedItem="{Binding SelectedFilter, Mode=TwoWay}"
+                VerticalOptions="Center"
+                HorizontalOptions="FillAndExpand"
+                TextColor="White">
+                    <Picker.ItemDisplayBinding>
+                        <Binding Path="CategoryName" />
+                    </Picker.ItemDisplayBinding>
+                </Picker>
+            </StackLayout>
+        </Frame>-->
+
+        <!--<Frame  Background="Transparent">
             <StackLayout Orientation="Horizontal" Padding="10">
                 <Label Text="Filter" VerticalOptions="Center" TextColor="White"/>
-                    <Picker ItemsSource="{Binding CategoryList}" 
-                    SelectedItem="{Binding SelectedFilter}" 
+                <Picker ItemsSource="{Binding CategoryList}" 
+                    ItemDisplayBinding="{Binding CategoryName}"
+                     SelectedItem="{Binding SelectedFilter}"
                     VerticalOptions="Center" 
-                    HorizontalOptions="FillAndExpand"
-                    TextColor="White">
-                        <Picker.ItemDisplayBinding>
-                            <Binding Path="CategoryName"/>
-                        </Picker.ItemDisplayBinding>
-                    </Picker>
-                </StackLayout>
-            </Frame>
+                    HorizontalOptions="FillAndExpand"/>
+
+            </StackLayout>
+            </Frame>-->
 
 
         <ListView x:Name="TaskList"

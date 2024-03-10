@@ -78,7 +78,7 @@ namespace GuardKeyProject.Services
         }
 
        
-
+        
         public async Task<List<Category>> FilterCategoriesAsync(string selectedFilter)
         {
             if (selectedFilter == "All")
