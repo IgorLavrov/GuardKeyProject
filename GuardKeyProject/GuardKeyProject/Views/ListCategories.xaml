@@ -17,7 +17,7 @@
 
     <StackLayout Margin="5,30,5,5">
 
-        <Frame Background="Transparent">
+        <!--<Frame Background="Transparent">
             <StackLayout Orientation="Horizontal" Padding="10">
                 <Label Text="Filter" VerticalOptions="Center" TextColor="White" />
                 <Picker x:Name="picker"
@@ -31,12 +31,12 @@
                     </Picker.ItemDisplayBinding>
                 </Picker>
             </StackLayout>
-        </Frame>
-        <!--<Frame Background="Transparent">
+        </Frame>-->
+        <!--<Frame Background="Transparent">-->
             <StackLayout Orientation="Horizontal" Padding="10">
                 <Label Text="Filter" VerticalOptions="Center" TextColor="White" />
                 <Picker ItemsSource="{Binding CategoryList}"
-                SelectedItem="{Binding SelectedFilter, Mode=TwoWay}"
+                SelectedItem="{Binding SelectedItem}"
                 VerticalOptions="Center"
                 HorizontalOptions="FillAndExpand"
                 TextColor="White">
@@ -45,7 +45,7 @@
                     </Picker.ItemDisplayBinding>
                 </Picker>
             </StackLayout>
-        </Frame>-->
+        <!--</Frame>-->
 
         <!--<Frame  Background="Transparent">
             <StackLayout Orientation="Horizontal" Padding="10">

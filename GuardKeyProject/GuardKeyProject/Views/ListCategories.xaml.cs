@@ -19,7 +19,7 @@ namespace GuardKeyProject.Views
 
             InitializeComponent();
 
-            BindingContext = new CategoryViewModel();
+            //BindingContext = new CategoryViewModel();
         }
 
         protected override void OnAppearing()

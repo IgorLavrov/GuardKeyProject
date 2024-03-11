@@ -101,7 +101,8 @@ namespace GuardKeyProject.ViewModels
             OpenCategoryPageCommand = new Command(OpenCategoryPage);
 
             getCategories();
-         
+
+
 
         }
 
@@ -221,32 +222,6 @@ namespace GuardKeyProject.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        //private string selectedFilter { get; set; }
-        //public string SelectedFilter
-        //{
-        //    get => selectedFilter;
-        //    set
-        //    {
-        //        if (selectedFilter != value)
-        //        {
-        //            selectedFilter = value;
-        //            OnPropertyChanged(nameof(SelectedFilter));
-        //            FilterItemsAsync();
-        //        }
-        //    }
-        //}
-
-        //private ObservableCollection<Category> categoryList;
-        //public ObservableCollection<Category> CategoryList
-        //{
-        //    get { return categoryList; }
-        //    set
-        //    {
-        //        categoryList = value;
-        //        OnPropertyChanged(nameof(CategoryList));
-
-        //    }
-        //}
 
         //private Category selectedCategory;
         //public Category SelectedCategory
@@ -259,24 +234,36 @@ namespace GuardKeyProject.ViewModels
         //    }
         //}
 
-        //public async Task FilterItemsAsync()
-        //{
-        //    if (string.IsNullOrEmpty(SelectedFilter) || SelectedFilter == "All")
-        //    {
-        //        // Reset the filter and retrieve all categories
-        //        getCategories();
-        //    }
-        //    else
-        //    {
-        //        CategoryList.Clear();
-        //        IEnumerable<Category> filteredRecords;
-        //        // Filter records based on the selected option
-        //        filteredRecords = await App.CategoryService.FilterCategoriesAsync(SelectedFilter);
+        private string selectedItem ;
+        public string SelectedItem
+        {
+            get { return selectedItem; }
+            set
+            {
+                if (setProperty(ref selectedItem, value))
+                OnPropertyChanged(nameof(SelectedItem));
+                FilterItemsAsync();
+            }
+              
+        }
 
-        //        // Directly assign the filtered records to CategoryList
-        //        CategoryList = new ObservableCollection<Category>(filteredRecords);
-        //    }
-        //}
+        public async Task FilterItemsAsync()
+        {
+
+            // Implement your filtering logic based on the selected filter
+            // For example, you can update the CategoryList property with filtered data
+
+            if (string.IsNullOrEmpty(selectedItem) || selectedItem == "All")
+            {
+                // Reset the filter and retrieve all categories
+                getCategories();
+            }
+            else
+            {
+                var filteredCategories = await App.CategoryService.FilterCategoriesAsync(selectedItem);
+                CategoryList = new ObservableCollection<Category>(filteredCategories);
+            }
+        }
 
 
 
